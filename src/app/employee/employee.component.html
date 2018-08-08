@@ -1,11 +1,13 @@
 <mat-card class="mat-elevation-z5">
-  <h3>Departments</h3>
+  <section class="mat-typography">
+    <h2>Departments</h2>
+  </section>
   <mat-divider></mat-divider>
 
   <form class="employee-form">
 
     <mat-form-field class="employee-standard-input">
-      <input matInput placeholder="Name" [formControl]="nameFormControl" [errorStateMatcher]="matcher">
+      <input matInput placeholder="Name" style="margin-top:20px" [formControl]="nameFormControl" [errorStateMatcher]="matcher">
       <mat-hint>Department Name</mat-hint>
       <mat-error *ngIf="nameFormControl.hasError('required')">
         Name is
@@ -14,7 +16,7 @@
     </mat-form-field>
 
     <mat-form-field class="employee-standard-input">
-      <input matInput placeholder="Location" [formControl]="locationFormControl" [errorStateMatcher]="matcher">
+      <input matInput placeholder="Location" style="margin-top:20px" [formControl]="locationFormControl" [errorStateMatcher]="matcher">
       <mat-hint>Location of department (City)</mat-hint>
       <mat-error *ngIf="locationFormControl.hasError('required')">
         Location is
