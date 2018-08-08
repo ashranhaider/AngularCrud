@@ -1,0 +1,17 @@
+.employee-container {
+  display: flex;
+  flex-direction: column;
+}
+.employee-form{
+  margin-top:20px; 
+}
+.employee-full-width {
+  width: 100%;
+}
+.employee-standard-input {
+  width: 70%;
+}
+.employee-form-btn{
+  margin-top: 20px;
+
+}

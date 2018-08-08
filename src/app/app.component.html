@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Crud Application</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="app-sidenav-container">
+    
+    <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10" [opened]="true" [mode]="'side'">
+        <mat-list>
+            <mat-list-item>Item 1</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Item 2</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Item 3</mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    
+    <div style="margin: 20px">
+        <mat-card>
+            <app-employee></app-employee>
+        </mat-card>
+    </div>
+    
+</mat-sidenav-container>
