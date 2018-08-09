@@ -10,25 +10,31 @@
     <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10" [opened]="true" [mode]="'side'">
         <mat-list>
             <mat-list-item>
-                    
-                    <a href="#">
-                        <i><mat-icon>home</mat-icon></i>
-                        Home
-                    </a>
+                <a class="sidnavLink" href="#">
+                    <mat-icon class="navbarIcon">home</mat-icon>
+                    Home
+                </a>
             </mat-list-item>
             <mat-divider></mat-divider>
+
             <mat-list-item>
-                <a href="#">Employees</a>
+                <a class="sidnavLink" href="#">
+                    <mat-icon class="navbarIcon">person</mat-icon>
+                    Employees
+                </a>
             </mat-list-item>
             <mat-divider></mat-divider>
+
             <mat-list-item>
-                <a href="#">Departments</a>
+                <a class="sidnavLink" href="#">
+                    <mat-icon class="navbarIcon">domain</mat-icon>
+                    Departments
+                </a>
             </mat-list-item>
+
         </mat-list>
     </mat-sidenav>
 
-    <div style="margin: 20px">
-        <app-employee></app-employee>
-    </div>
+    <app-home></app-home>
 
 </mat-sidenav-container>

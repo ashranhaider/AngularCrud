@@ -19,3 +19,12 @@
       align-items: center;
       justify-content: center;
     }
+    .sidnavLink{
+      text-decoration:none;
+      color: black;
+    }
+    .navbarIcon{
+      font-size:32px;
+      color:black;
+      margin-right: 10px;
+    }
