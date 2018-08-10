@@ -24,25 +24,31 @@
       </mat-error>
     </mat-form-field>
     <br/>
-    <button type="submit" class="department-form-btn" mat-stroked-button color="primary">Save</button>
+    <button type="submit" (click)="saveDepartment()" class="department-form-btn" mat-flat-button color="primary">Save</button>
   </form>
 </mat-card>
-<mat-card class="department-Card mat-elevation-z5">
- 
-  <table mat-table [dataSource]="departments" class="mat-elevation-z8">
-    
-    <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef> Name. </th>
-      <td mat-cell *matCellDef="let department"> {{department.Name}} </td>
-    </ng-container>
+<mat-card class="department-Card">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="departments" matSort>
 
-    <ng-container matColumnDef="Location">
-      <th mat-header-cell *matHeaderCellDef> Location. </th>
-      <td mat-cell *matCellDef="let department"> {{department.Location}} </td>
-    </ng-container>
+      <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+        <td mat-cell *matCellDef="let department"> {{department.ID}} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name. </th>
+        <td mat-cell *matCellDef="let department"> {{department.Name}} </td>
+      </ng-container>
 
+      <ng-container matColumnDef="Location">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Location. </th>
+        <td mat-cell *matCellDef="let department"> {{department.Location}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
 </mat-card>

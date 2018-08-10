@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher,MatSort, MatTableDataSource,MatPaginator, MatTable } from '@angular/material';
 
 import {Department} from '../Models/Departments';
 import {DepartmentsServiceService} from '../Services/departments-service.service';
@@ -17,15 +17,25 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './department.component.html',
   styleUrls: ['./department.component.css']
 })
+
 export class DepartmentComponent implements OnInit {
 
   departments: Department[];
+  
+  displayedColumns: string[] = ['ID','Name', 'Location'];
+  dataSource = new MatTableDataSource<Department>(this.departments);
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;  
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<Department>;
+  
   constructor(private departmentService: DepartmentsServiceService) { }
   
   ngOnInit() {
     this.getDepartments();
+    this.dataSource.paginator = this.paginator;
   }
+  
   nameFormControl = new FormControl('', [
     Validators.required
   ]);
@@ -34,9 +44,19 @@ export class DepartmentComponent implements OnInit {
     Validators.required
   ]);
 
-  matcher = new MyErrorStateMatcher();
-  displayedColumns: string[] = ['Name', 'Location'];
+  matcher = new MyErrorStateMatcher();  
+
   getDepartments(): void{
     this.departmentService.getDepartments().subscribe(deps => this.departments = deps);   
+  }
+
+  saveDepartment():void{
+
+    var department = new Department();
+    department.Name = this.nameFormControl.value;
+    department.Location = this.locationFormControl.value;
+
+    this.departmentService.saveDepartment(department).subscribe(dep => this.departments.push(dep));
+    this.table.renderRows();
   }
 }
