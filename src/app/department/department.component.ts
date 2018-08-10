@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 
+import {Department} from '../Models/Departments';
+import {DepartmentsServiceService} from '../Services/departments-service.service';
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -17,9 +19,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class DepartmentComponent implements OnInit {
 
-  constructor() { }
+  departments: Department[];
 
+  constructor(private departmentService: DepartmentsServiceService) { }
+  
   ngOnInit() {
+    this.getDepartments();
   }
   nameFormControl = new FormControl('', [
     Validators.required
@@ -30,4 +35,8 @@ export class DepartmentComponent implements OnInit {
   ]);
 
   matcher = new MyErrorStateMatcher();
+  displayedColumns: string[] = ['Name', 'Location'];
+  getDepartments(): void{
+    this.departmentService.getDepartments().subscribe(deps => this.departments = deps);   
+  }
 }
