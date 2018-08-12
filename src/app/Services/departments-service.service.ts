@@ -20,14 +20,13 @@ export class DepartmentsServiceService {
   constructor(private http: HttpClient) { }
 
   getDepartments(): Observable<Department[]> {
-    
-    var url = AppConstants.ServerBaseURL + this.departmentURL;
-    var data = this.http.get<Department[]>(url);
-    return data;
+
+    const url = AppConstants.ServerBaseURL + this.departmentURL;
+    return this.http.get<Department[]>(url);
   }
 
-  saveDepartment(department : Department): Observable<Department>{
-    var url = AppConstants.ServerBaseURL + this.departmentURL;
-    return this.http.post<Department>(url,department);    
+  saveDepartment(department: Department): Observable<Department> {
+    const url = AppConstants.ServerBaseURL + this.departmentURL;
+    return this.http.post<Department>(url, department);
   }
 }
