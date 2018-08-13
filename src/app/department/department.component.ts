@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher, MatSort, MatTableDataSource, MatPaginator, MatTable } from '@angular/material';
+import { ErrorStateMatcher, MatSort, MatTableDataSource, MatPaginator, MatTable, MatSnackBar } from '@angular/material';
 
 import {Department} from '../Models/Departments';
 import {DepartmentsServiceService} from '../Services/departments-service.service';
@@ -22,7 +22,7 @@ export class DepartmentComponent implements OnInit {
 
   departments: Department[];
 
-  displayedColumns: string[] = ['ID', 'Name', 'Location'];
+  displayedColumns: string[] = ['ID', 'Name', 'Location',"actions"];
   dataSource: MatTableDataSource<Department>;
 
   nameFormControl = new FormControl('', [
@@ -37,7 +37,8 @@ export class DepartmentComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<Department>;
 
-  constructor(private departmentService: DepartmentsServiceService, private changeDetectorRefs: ChangeDetectorRef) { }
+  constructor(private departmentService: DepartmentsServiceService, private changeDetectorRefs: ChangeDetectorRef,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.initializeDepartmentsDataTable();
@@ -62,7 +63,18 @@ export class DepartmentComponent implements OnInit {
     this.departmentService.saveDepartment(department).subscribe(dep => {
       this.departments.push(dep);
       this.dataSource = new MatTableDataSource(this.departments);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      
       this.changeDetectorRefs.detectChanges();
+      this.snackBar.open("Department Saved!", "Ok", {
+        duration: 2000,
+      });
+    });
+  }
+  showthat(d: Department):void{
+    this.snackBar.open(d.ID.toString() + " " + d.Name.toString(), "Ok", {
+      duration: 2000,
     });
   }
 }
