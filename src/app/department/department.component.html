@@ -27,8 +27,10 @@
     <button type="submit" (click)="saveDepartment()" class="department-form-btn" mat-flat-button color="primary">Save</button>
   </form>
 </mat-card>
-<mat-card class="department-Card">
-  <div class="mat-elevation-z8">
+<mat-card class="department-Card mat-elevation-z8">
+  <h3>Departments Data:</h3>
+  <hr>
+  <div class="">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="ID">
