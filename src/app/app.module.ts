@@ -2,15 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import{MaterialModule} from './Shared/material.module';
+import {MaterialModule} from './Shared/material.module';
 import {EmployeeComponent} from './employee/employee.component';
-import { DepartmentComponent } from './department/department.component';
+import { DepartmentComponent, DialogComponent} from './department/department.component';
 import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
@@ -24,7 +24,8 @@ const appRoutes: Routes = [
     AppComponent,
     EmployeeComponent,
     DepartmentComponent,
-    HomeComponent
+    HomeComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +37,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    
+
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  entryComponents: [DialogComponent]
 })
 export class AppModule { }

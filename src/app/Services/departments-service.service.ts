@@ -16,17 +16,20 @@ const httpOptions = {
 export class DepartmentsServiceService {
 
   private departmentURL = 'Departments';
+  private url = AppConstants.ServerBaseURL + this.departmentURL;
 
   constructor(private http: HttpClient) { }
 
   getDepartments(): Observable<Department[]> {
-
-    const url = AppConstants.ServerBaseURL + this.departmentURL;
-    return this.http.get<Department[]>(url);
+    return this.http.get<Department[]>(this.url);
   }
 
   saveDepartment(department: Department): Observable<Department> {
-    const url = AppConstants.ServerBaseURL + this.departmentURL;
-    return this.http.post<Department>(url, department);
+
+    return this.http.post<Department>(this.url, department);
+  }
+
+  updateDepartment(department: Department): Observable<Department> {
+    return this.http.put<Department>(this.url + '/' + department.ID, department);
   }
 }
