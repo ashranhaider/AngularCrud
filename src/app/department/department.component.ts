@@ -71,9 +71,13 @@ export class DepartmentComponent implements OnInit {
       this.snackBar.open('Department Saved!', 'Ok', {
         duration: 2000,
       });
+      this.clearForm();
     });
   }
-
+clearForm(): void {
+  this.nameFormControl.value = '';
+  this.locationFormControl.value = '';
+}
   showthat(d: Department): void {
 
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -110,7 +114,7 @@ export class DepartmentComponent implements OnInit {
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-stroked-button (click)="onNoClick()">Update this shit</button>
+    <button mat-stroked-button (click)="onUpdateClick()">Update this shit</button>
   </div>
   `,
 })
@@ -121,7 +125,7 @@ export class DialogComponent {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public departmentData: Department, public snackBar: MatSnackBar) {}
 
-  onNoClick(): void {
+  onUpdateClick(): void {
     this.departmentService.updateDepartment(this.departmentData).subscribe(x => {
       this.snackBar.open('Department ' + this.departmentData.Name.toString() + ' updated successfully.', 'Ok', {
           duration: 4000,
