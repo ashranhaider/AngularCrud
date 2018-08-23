@@ -3,8 +3,8 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher, MatSort, MatTableDataSource, MatPaginator, MatTable, MatSnackBar ,
    MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import {Department} from '../Models/Departments';
-import {DepartmentsServiceService} from '../Services/departments-service.service';
+import {Department} from '../../Models/Departments';
+import {DepartmentsServiceService} from '../../Services/departments-service.service';
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

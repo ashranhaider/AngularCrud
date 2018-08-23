@@ -9,9 +9,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MaterialModule} from './Shared/material.module';
-import {EmployeeComponent} from './employee/employee.component';
-import { DepartmentComponent, DialogComponent} from './department/department.component';
-import { HomeComponent } from './home/home.component';
+import {EmployeeComponent} from './Components/employee/employee.component';
+import { DepartmentComponent, DialogComponent} from './Components/department/department.component';
+import { HomeComponent } from './Components/home/home.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
