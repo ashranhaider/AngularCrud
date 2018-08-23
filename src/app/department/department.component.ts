@@ -63,21 +63,13 @@ export class DepartmentComponent implements OnInit {
 
     this.departmentService.saveDepartment(department).subscribe(dep => {
       this.departments.push(dep);
-      this.dataSource = new MatTableDataSource(this.departments);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.refreshData();
 
-      this.changeDetectorRefs.detectChanges();
       this.snackBar.open('Department Saved!', 'Ok', {
         duration: 2000,
       });
-      this.clearForm();
     });
   }
-clearForm(): void {
-  this.nameFormControl.value = '';
-  this.locationFormControl.value = '';
-}
   showthat(d: Department): void {
 
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -89,6 +81,30 @@ clearForm(): void {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  departmentDelete(department: Department) {
+    const Confirmation = confirm('Are you fucking sure bro?');
+
+    if (Confirmation) {
+      this.departmentService.deleteDepartment(department.ID).subscribe(dep => {
+        const index = this.departments.findIndex(d => d.ID === department.ID);
+        this.departments.splice(index, 1);
+
+        this.refreshData();
+        this.snackBar.open('Department' + department.Name + ' Deleted!', 'Ok', {
+          duration: 2000,
+        });
+      });
+    }
+
+  }
+
+  refreshData() {
+    this.dataSource = new MatTableDataSource(this.departments);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.changeDetectorRefs.detectChanges();
   }
 }
 //////////////////////////////////////////////////////////////////

@@ -15,21 +15,24 @@ const httpOptions = {
 
 export class DepartmentsServiceService {
 
-  private departmentURL = 'Departments';
-  private url = AppConstants.ServerBaseURL + this.departmentURL;
+  private departmentURL = AppConstants.ServerBaseURL + 'Departments';
 
   constructor(private http: HttpClient) { }
 
   getDepartments(): Observable<Department[]> {
-    return this.http.get<Department[]>(this.url);
+    return this.http.get<Department[]>(this.departmentURL);
   }
 
   saveDepartment(department: Department): Observable<Department> {
 
-    return this.http.post<Department>(this.url, department);
+    return this.http.post<Department>(this.departmentURL, department);
   }
 
   updateDepartment(department: Department): Observable<Department> {
-    return this.http.put<Department>(this.url + '/' + department.ID, department);
+    return this.http.put<Department>(this.departmentURL + '/' + department.ID, department);
   }
+  deleteDepartment(departmentID: Number): Observable<Department> {
+    return this.http.delete<Department>(this.departmentURL + '/' + departmentID);
+  }
+
 }
